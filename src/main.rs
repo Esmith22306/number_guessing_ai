@@ -85,7 +85,6 @@ fn main() {
 
     let mut ai = AIPlayer::new(low, high);
 
-    /// Game loop
     loop {
         let guess = ai.make_guess();
         println!("Is it {}?", guess);
