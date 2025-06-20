@@ -1,6 +1,8 @@
 use std::io;
+/// Brings in rusts standard library in/output module so we can read user inputs from terminal
 
 /// Struct representing the AI player with guessing state
+/// Keeps track of everything the AI will need
 struct AIPlayer {
     low: i32,              // Current lower bound
     high: i32,             // Current upper bound
@@ -9,6 +11,7 @@ struct AIPlayer {
     history: Vec<i32>,     // History of all guesses
 }
 
+/// Implmenting AIPlayer methods
 impl AIPlayer {
     /// Creates a new AIPlayer instance with starting bounds
     fn new(low: i32, high: i32) -> Self {
@@ -28,6 +31,7 @@ impl AIPlayer {
     }
 
     /// Updates the AI's guess range based on feedback
+    /// Creates new lower or upper bound
     fn update(&mut self, feedback: &str) {
         match feedback {
             "too low" => self.low = self.guess + 1,
@@ -70,6 +74,7 @@ fn read_bound(prompt: &str) -> i32 {
 }
 
 fn main() {
+    
     // Get custom range from user
     println!("Welcome to the Number Guessing AI!");
     let low = read_bound("Enter the lower bound:");
@@ -80,6 +85,7 @@ fn main() {
 
     let mut ai = AIPlayer::new(low, high);
 
+    /// Game loop
     loop {
         let guess = ai.make_guess();
         println!("Is it {}?", guess);
